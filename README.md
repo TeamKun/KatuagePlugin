@@ -12,7 +12,7 @@
 *・RandomDropOnOff: true*  
 　ランダムドロップのオン/オフ(true,false)  
   
-*・RandomDropProbability: 50*  
+*・RandomDropProbability: 70*  
 　ランダムドロップの確立設定(0~100)
   
 *・Item1~18:*  
@@ -24,7 +24,7 @@
 *・InventoryDropOnOff: true*  
 　インベントリドロップのオン/オフ(true,false)  
    
-*・InventoryDropProbability: 50*  
+*・InventoryDropProbability: 70*  
 　インベントリドロップの確立設定(0~100)  
    
 ## コマンド  
