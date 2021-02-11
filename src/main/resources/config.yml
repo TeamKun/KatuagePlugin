@@ -1,0 +1,66 @@
+PluginOnOff: true
+
+RandomDropOnOff: true
+RandomDropProbability: 70
+
+Item1:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item2:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item3:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item4:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item5:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item6:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item7:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item8:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item9:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item10:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item11:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item12:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item13:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item14:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item15:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item16:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item17:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+Item18:
+  ==: org.bukkit.inventory.ItemStack
+  type: STICK
+
+InventoryDropOnOff: true
+InventoryDropProbability: 70
+
+DamageDropOnOff: true
+DamageDropProbability: 100
+
