@@ -13,7 +13,7 @@
 　ランダムドロップのオン/オフ(true,false)  
   
 *・RandomDropProbability: 70*  
-　ランダムドロップの確立設定(0~100)
+　ランダムドロップの確率設定(0~100)
   
 *・Item1~18:*  
    　　*==: org.bukkit.inventory.ItemStack*  
@@ -25,14 +25,14 @@
 　インベントリドロップのオン/オフ(true,false)  
    
 *・InventoryDropProbability: 70*  
-　インベントリドロップの確立設定(0~100)  
+　インベントリドロップの確率設定(0~100)  
  
   **ダメージドロップ関係の設定**  
 *・InventoryDropOnOff: true*  
 　ダメージドロップのオン/オフ(true,false)  
    
 *・InventoryDropProbability: 100*  
-　ダメージドロップの確立設定(0~100)  
+　ダメージドロップの確率設定(0~100)  
    
 ## コマンド  
 *コマンドの実行にはOP権限が必要  
