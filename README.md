@@ -17,7 +17,7 @@
   
 *・Item1~18:*  
    　　*==: org.bukkit.inventory.ItemStack*  
-   　　*type: DIAMOND*  
+   　　*type: STICK*  
 　ランダムドロップアイテムの設定(type: アイテム名)
      
  **インベントリドロップ関係の設定**  
