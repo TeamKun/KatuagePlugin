@@ -26,6 +26,13 @@
    
 *・InventoryDropProbability: 70*  
 　インベントリドロップの確立設定(0~100)  
+ 
+  **ダメージドロップ関係の設定**  
+*・InventoryDropOnOff: true*  
+　ダメージドロップのオン/オフ(true,false)  
+   
+*・InventoryDropProbability: 100*  
+　ダメージドロップの確立設定(0~100)  
    
 ## コマンド  
 *コマンドの実行にはOP権限が必要  
@@ -46,4 +53,10 @@
    
 *・/katuage inveP #0〜100の数字*  
 　インベントリドロップの確率の設定(0〜100%)  
+ 
+*・/katuage dame on , /katuage dame off*  
+　ダメージドロップのon/offの設定  
+   
+*・/katuage dameP #0〜100の数字*  
+　ダメージドロップの確率の設定(0〜100%)  
    
