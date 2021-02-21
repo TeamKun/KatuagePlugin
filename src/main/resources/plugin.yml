@@ -1,0 +1,9 @@
+name: Katuage
+version: 2.0
+main: net.kunmc.lab.katuage.Katuage
+api-version: 1.15
+commands:
+  katuage:
+    description: You can Katuage
+    usage: '/katuage 引数1 引数2'
+    default: true
