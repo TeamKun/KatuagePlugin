@@ -33,7 +33,20 @@
    
 *・InventoryDropProbability: 100*  
 　ダメージドロップの確率設定(0~100)  
+ 
+ **マネークラフト関係の設定**  
+ *・MoneyDropOnOff*  
+ 　マネードロップのオン/オフ  
    
+ *・MoneyDropProbability*  
+ 　マネードロップの確立設定(0~100)  
+    
+ *・MoneyDropType*  
+ 　マネードロップの硬貨、紙幣の設定(100or1000)  
+    
+ *・MoneyDropAmount*  
+ 　マネードロップの枚数の設定  
+     
 ## コマンド  
 *コマンドの実行にはOP権限が必要  
 *・/katuage main on , /katuage main off*  
@@ -59,4 +72,18 @@
    
 *・/katuage dameP #0〜100の数字*  
 　ダメージドロップの確率の設定(0〜100%)  
+   
+*・/katuage money on , /katuage money off*  
+　マネードロップのon/offの設定  
+   
+*・/katuage moneyP #0〜100の数字*  
+　マネードロップの確率の設定(0〜100%)  
+   
+*・/katuage moneyA #1以上の整数*  
+　マネードロップの枚数設定  
+   
+*・/katuage moneyT #100 or 1000*  
+　マネードロップの硬貨・貨幣の種類設定  
+   
+ 
    
