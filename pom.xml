@@ -6,7 +6,7 @@
 
     <groupId>net.kunmc.lab</groupId>
     <artifactId>katuage</artifactId>
-    <version>3.4</version>
+    <version>3.5</version>
     <packaging>jar</packaging>
 
     <name>Katuage</name>
@@ -78,6 +78,11 @@
             <groupId>com.github.TeamKun</groupId>
             <artifactId>MoneyCraft</artifactId>
             <version>1.5.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7</version>
         </dependency>
     </dependencies>
 </project>

@@ -14,8 +14,15 @@ public class ItemGet implements Listener {
         Item i = event.getItem();
         Player p = event.getPlayer();
         if(i.getCustomName()==null){
+            if(i.getItemStack().getItemMeta().getDisplayName().equals("MoneyCraft")){
+                i.getItemStack().setLore(null);
+            }
         } else if(i.getCustomName().equals("KatuagePlugin"+p.getName())){
             event.setCancelled(true);
+        }else{
+            if(i.getItemStack().getItemMeta().getDisplayName().equals("MoneyCraft")){
+                i.getItemStack().setLore(null);
+            }
         }
     }
     @EventHandler

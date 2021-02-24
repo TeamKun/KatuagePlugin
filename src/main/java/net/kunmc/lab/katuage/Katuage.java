@@ -1,6 +1,7 @@
 package net.kunmc.lab.katuage;
 
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
+import net.kunmc.lab.moneycraft.MoneyCraft;
 import net.kunmc.lab.moneycraft.api.MoneyCraftAPI;
 import org.bukkit.*;
 import org.bukkit.command.Command;
@@ -320,7 +321,8 @@ public class Katuage extends JavaPlugin implements Listener {
                 int numA = Integer.parseInt(config.getString("MoneyDropProbability"));
                 int type = Integer.parseInt(config.getString("MoneyDropType"));
                 int amount = Integer.parseInt(config.getString("MoneyDropAmount"));
-                if (numP <= numA){
+                int ans = amount*type;
+                if (numP <= numA && MoneyCraft.getEconomy().getBalance(p) >= ans){
                     if(type == 100 || type ==1000){
                         Entity ie = MoneyCraftAPI.dropMoney(p,loc,type,amount,true,true);
                         MoneyItemProcessing(p,ie,loc);
@@ -363,8 +365,9 @@ public class Katuage extends JavaPlugin implements Listener {
                 int numA = Integer.parseInt(config.getString("MoneyDropProbability"));
                 int type = Integer.parseInt(config.getString("MoneyDropType"));
                 int amount = Integer.parseInt(config.getString("MoneyDropAmount"));
+                int ans = type * amount;
                 if (numP <= numA){
-                    if(type == 100 || type ==1000){
+                    if(type == 100 || type ==1000 && MoneyCraft.getEconomy().getBalance(p) >= ans){
                         Entity ie = MoneyCraftAPI.dropMoney(p,loc,type,amount,true,true);
                         MoneyItemProcessing(p,ie,loc);
                     }
@@ -395,13 +398,13 @@ public class Katuage extends JavaPlugin implements Listener {
         MoneyCheck();
     }
     public void MoneyCheck(){
-           if(Bukkit.getPluginManager().getPlugin("MoneyCraft") == null ){
+           if(Bukkit.getPluginManager().getPlugin("MoneyCraft") == null && Bukkit.getPluginManager().getPlugin("Vault") == null){
                if(money == true||check == false) {
                    getLogger().info(ChatColor.YELLOW + "MoneyCraftが認識されませんでした。money関係のコマンドを無効化します。");
                    money = false;
                    check = true;
                }
-           } else if (Bukkit.getPluginManager().getPlugin("MoneyCraft").isEnabled()) {
+           } else if (Bukkit.getPluginManager().getPlugin("MoneyCraft").isEnabled()&&Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
                if (money == false || check == false) {
                    getLogger().info(ChatColor.GREEN + "MoneyCraftが認識されました。money関係のコマンドを有効化します。");
                    money = true;
@@ -558,8 +561,42 @@ public class Katuage extends JavaPlugin implements Listener {
         }
     }
 
-    //タイマー処理
-    public void Timer(Player p,Item ic,Entity i){
+    //アイテムのパーティクル等の処理
+        public void ItemProcessing(Player p,Entity i,Location l){
+            p.getWorld().playSound(l, Sound.ITEM_ARMOR_EQUIP_CHAIN, 100, 1);
+            Item ic = (Item) i;
+            ic.setCustomName("KatuagePlugin"+p.getName());
+            i.getLocation().getWorld().spawnParticle(Particle.VILLAGER_HAPPY,i.getLocation(),8,0.3,0.7,0.3);
+            TimerTask Pt1 = new TimerTask(){
+                public void run(){
+                    i.getLocation().getWorld().spawnParticle(Particle.VILLAGER_HAPPY,i.getLocation(),8,0.3,0.7,0.3);
+                }
+            };
+            timer.schedule(Pt1,1000);
+            TimerTask Pt2 = new TimerTask(){
+                public void run(){
+                    i.getLocation().getWorld().spawnParticle(Particle.VILLAGER_HAPPY,i.getLocation(),8,0.3,0.7,0.3);
+                }
+            };
+            timer.schedule(Pt2,2000);
+            TimerTask Pt3 = new TimerTask(){
+                public void run(){
+                    i.getLocation().getWorld().spawnParticle(Particle.VILLAGER_HAPPY,i.getLocation(),8,0.3,0.7,0.3);
+                }
+            };
+            timer.schedule(Pt3,3000);
+            TimerTask del = new TimerTask(){
+                public void run(){
+                    ic.setCustomName(null);
+                }
+            };
+            timer.schedule(del,6000);
+        }
+    public void MoneyItemProcessing(Player p,Entity i,Location l){
+        p.getWorld().playSound(l, Sound.ITEM_ARMOR_EQUIP_CHAIN, 100, 1);
+        Item ic = (Item) i;
+        ic.setCustomName(null);
+        ic.setCustomName("KatuagePlugin"+p.getName());
         i.getLocation().getWorld().spawnParticle(Particle.VILLAGER_HAPPY,i.getLocation(),8,0.3,0.7,0.3);
         TimerTask Pt1 = new TimerTask(){
             public void run(){
@@ -581,27 +618,10 @@ public class Katuage extends JavaPlugin implements Listener {
         timer.schedule(Pt3,3000);
         TimerTask del = new TimerTask(){
             public void run(){
-                if(ic.getItemStack().getItemMeta().hasLore()) {
-                    if (ic.getItemStack().getItemMeta().getLore().get(0).equals("threw")) {
-                        ic.getItemStack().setLore(null);
-                    }
-                }
-                    ic.setCustomName(null);
+                ic.setCustomName(null);
             }
         };
         timer.schedule(del,6000);
     }
 
-    //アイテムのパーティクル等の処理
-        public void ItemProcessing(Player p,Entity i,Location l){
-            p.getWorld().playSound(l, Sound.ITEM_ARMOR_EQUIP_CHAIN, 100, 1);
-            Item ic = (Item) i;
-            ic.setCustomName("KatuagePlugin"+p.getName());
-            Timer(p,ic,i);
-        }
-        public void MoneyItemProcessing(Player p,Entity i,Location l){
-            p.getWorld().playSound(l, Sound.ITEM_ARMOR_EQUIP_CHAIN, 100, 1);
-            Item ic = (Item) i;
-            Timer(p,ic,i);
-    }
 }

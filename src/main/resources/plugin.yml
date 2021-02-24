@@ -1,9 +1,9 @@
 name: Katuage
-version: 3.4
+version: 3.5
 main: net.kunmc.lab.katuage.Katuage
 api-version: 1.15
 authors: [ yanaaaaa ]
-softdepend: [ MoneyCraft ]
+softdepend: [ MoneyCraft,Vault ]
 commands:
   katuage:
     description: Notionもしくは GitHubを見てね。
