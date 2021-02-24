@@ -2,6 +2,7 @@ package net.kunmc.lab.katuage;
 
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import net.kunmc.lab.moneycraft.MoneyCraft;
+import net.kunmc.lab.moneycraft.api.MoneyCraftAPI;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -320,15 +321,10 @@ public class Katuage extends JavaPlugin implements Listener {
                 int numA = Integer.parseInt(config.getString("MoneyDropProbability"));
                 int type = Integer.parseInt(config.getString("MoneyDropType"));
                 int amount = Integer.parseInt(config.getString("MoneyDropAmount"));
-                int ans = type * amount;
                 if (numP <= numA){
                     if(type == 100 || type ==1000){
-                        if(MoneyCraft.getEconomy().getBalance(p) >= ans) {
-                                ItemStack item = MoneyCraftItem(type,amount);
-                                Entity ie = loc.getWorld().dropItem(loc, item);
-                                MoneyCraft.getEconomy().depositPlayer(p, -ans);
-                                MoneyItemProcessing(p, ie, loc);
-                        }
+                        Entity ie = MoneyCraftAPI.dropMoney(p,loc,type,amount,true,true);
+                        MoneyItemProcessing(p,ie,loc);
                     }
                 }
             }
@@ -368,15 +364,10 @@ public class Katuage extends JavaPlugin implements Listener {
                 int numA = Integer.parseInt(config.getString("MoneyDropProbability"));
                 int type = Integer.parseInt(config.getString("MoneyDropType"));
                 int amount = Integer.parseInt(config.getString("MoneyDropAmount"));
-                int ans = type * amount;
                 if (numP <= numA){
                     if(type == 100 || type ==1000){
-                        if(MoneyCraft.getEconomy().getBalance(p) >= ans) {
-                                ItemStack item = MoneyCraftItem(type,amount);
-                                Entity ie = loc.getWorld().dropItem(loc, item);
-                                MoneyCraft.getEconomy().depositPlayer(p, -(ans));
-                                MoneyItemProcessing(p, ie, loc);
-                        }
+                        Entity ie = MoneyCraftAPI.dropMoney(p,loc,type,amount,true,true);
+                        MoneyItemProcessing(p,ie,loc);
                     }
                 }
             }
@@ -569,7 +560,7 @@ public class Katuage extends JavaPlugin implements Listener {
     }
 
     //タイマー処理
-    public void Timer(Item ic,Entity i){
+    public void Timer(Player p,Item ic,Entity i){
         i.getLocation().getWorld().spawnParticle(Particle.VILLAGER_HAPPY,i.getLocation(),8,0.3,0.7,0.3);
         TimerTask Pt1 = new TimerTask(){
             public void run(){
@@ -591,11 +582,7 @@ public class Katuage extends JavaPlugin implements Listener {
         timer.schedule(Pt3,3000);
         TimerTask del = new TimerTask(){
             public void run(){
-                if(i.getCustomName().contains("MoneyKatuagePlugin")){
-                    ic.setCustomName("Money");
-                }else {
                     ic.setCustomName(null);
-                }
             }
         };
         timer.schedule(del,6000);
@@ -606,12 +593,11 @@ public class Katuage extends JavaPlugin implements Listener {
             p.getWorld().playSound(l, Sound.ITEM_ARMOR_EQUIP_CHAIN, 100, 1);
             Item ic = (Item) i;
             ic.setCustomName("KatuagePlugin"+p.getName());
-            Timer(ic,i);
+            Timer(p,ic,i);
         }
         public void MoneyItemProcessing(Player p,Entity i,Location l){
             p.getWorld().playSound(l, Sound.ITEM_ARMOR_EQUIP_CHAIN, 100, 1);
             Item ic = (Item) i;
-            ic.setCustomName("MoneyKatuagePlugin"+p.getName());
-            Timer(ic,i);
+            Timer(p,ic,i);
     }
 }
