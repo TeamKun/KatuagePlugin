@@ -581,6 +581,11 @@ public class Katuage extends JavaPlugin implements Listener {
         timer.schedule(Pt3,3000);
         TimerTask del = new TimerTask(){
             public void run(){
+                if(ic.getItemStack().getItemMeta().hasLore()) {
+                    if (ic.getItemStack().getItemMeta().getLore().get(0).equals("threw")) {
+                        ic.getItemStack().setLore(null);
+                    }
+                }
                     ic.setCustomName(null);
             }
         };

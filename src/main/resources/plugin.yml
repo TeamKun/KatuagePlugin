@@ -1,5 +1,5 @@
 name: Katuage
-version: 3.3
+version: 3.4
 main: net.kunmc.lab.katuage.Katuage
 api-version: 1.15
 authors: [ yanaaaaa ]
