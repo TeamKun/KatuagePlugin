@@ -1,7 +1,6 @@
 package net.kunmc.lab.katuage;
 
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
-import net.kunmc.lab.moneycraft.MoneyCraft;
 import net.kunmc.lab.moneycraft.api.MoneyCraftAPI;
 import org.bukkit.*;
 import org.bukkit.command.Command;
@@ -396,13 +395,13 @@ public class Katuage extends JavaPlugin implements Listener {
         MoneyCheck();
     }
     public void MoneyCheck(){
-           if(Bukkit.getPluginManager().getPlugin("MoneyCraft") == null || Bukkit.getPluginManager().getPlugin("Vault") == null){
+           if(Bukkit.getPluginManager().getPlugin("MoneyCraft") == null ){
                if(money == true||check == false) {
                    getLogger().info(ChatColor.YELLOW + "MoneyCraftが認識されませんでした。money関係のコマンドを無効化します。");
                    money = false;
                    check = true;
                }
-           } else if (Bukkit.getPluginManager().getPlugin("MoneyCraft").isEnabled() && Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
+           } else if (Bukkit.getPluginManager().getPlugin("MoneyCraft").isEnabled()) {
                if (money == false || check == false) {
                    getLogger().info(ChatColor.GREEN + "MoneyCraftが認識されました。money関係のコマンドを有効化します。");
                    money = true;
