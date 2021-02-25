@@ -325,7 +325,7 @@ public class Katuage extends JavaPlugin implements Listener {
                 if (numP <= numA && MoneyCraft.getEconomy().getBalance(p) >= ans){
                     if(type == 100 || type ==1000){
                         Entity ie = MoneyCraftAPI.dropMoney(p,loc,type,amount,true,true);
-                        MoneyItemProcessing(p,ie,loc);
+                        ItemProcessing(p,ie,loc);
                     }
                 }
             }
@@ -344,7 +344,7 @@ public class Katuage extends JavaPlugin implements Listener {
         reloadConfig();
         int numP = rand.nextInt(100);//アイテムドロップの確立
         FileConfiguration config = getConfig();
-        if (Visibilty(p, e) == true&&e.isSneaking()==true&&config.getBoolean("PluginOnOff") == true) {
+        if (Visibilty(p, e) == true&&e.isSneaking()&&config.getBoolean("PluginOnOff") == true) {
             if (config.getBoolean("DamageDropOnOff") == true && ItemCheck(p) == true) {
                 int numI = rand.nextInt(40);//インベントリアイテムの番号指定
                 int numA = Integer.parseInt(config.getString("DamageDropProbability"));
@@ -369,7 +369,7 @@ public class Katuage extends JavaPlugin implements Listener {
                 if (numP <= numA){
                     if(type == 100 || type ==1000 && MoneyCraft.getEconomy().getBalance(p) >= ans){
                         Entity ie = MoneyCraftAPI.dropMoney(p,loc,type,amount,true,true);
-                        MoneyItemProcessing(p,ie,loc);
+                        ItemProcessing(p,ie,loc);
                     }
                 }
             }
@@ -498,66 +498,23 @@ public class Katuage extends JavaPlugin implements Listener {
     public boolean Visibilty(Player p1, Player p2) {
         Location l1 = p1.getLocation();
         Location l2 = p2.getLocation();
-        double lx = l2.getX() - l1.getX();
-        double lz = l2.getZ() - l1.getZ();
-        double r1 = 0, r2 = 0;
-        r1 = l1.getYaw();
-        if (r1 < 0) {
-            if (r1 < 0 && r1 >= -90) {
-                if (lx < 0 && lz < 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else if (r1 < -90 && r1 >= -180) {
-                if (lx < 0 && lz >= 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else if (r1 < -180 && r1 >= -270) {
-                if (lx >= 0 && lz >= 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else if (r1 < -270) {
-                if (lx >= 0 && lz < 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }else{
-                return false;
-            }
-        } else {
-            if (r1 > 0 && r1 <= 90) {
-                if (lx >= 0 && lz < 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else if (r1 > 90 && r1 <= 180) {
-                if (lx >= 0 && lz >= 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else if (r1 > 180 && r1 <= 270) {
-                if (lx < 0 && lz >= 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else if (r1 > 270) {
-                if (lx < 0 && lz < 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }else{
-                return false;
-            }
+        double r1=((l1.getYaw()%360)+360)%360;
+        double r2=((l2.getYaw()%360)+360)%360;
+        double r1max , r1min;
+        if(r1+70>360){
+            r1min = r1+70-360;
+            r1max = r1-70;
+        }else if(r1-70<0){
+            r1min = r1 + 70;
+            r1max = 360 +(r1-70);
+        }else{
+            r1min = r1-70;
+            r1max = r1+70;
+        }
+        if(r1min<=r2&&r1max>=r2){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -565,6 +522,7 @@ public class Katuage extends JavaPlugin implements Listener {
         public void ItemProcessing(Player p,Entity i,Location l){
             p.getWorld().playSound(l, Sound.ITEM_ARMOR_EQUIP_CHAIN, 100, 1);
             Item ic = (Item) i;
+            ic.setCustomName(null);
             ic.setCustomName("KatuagePlugin"+p.getName());
             i.getLocation().getWorld().spawnParticle(Particle.VILLAGER_HAPPY,i.getLocation(),8,0.3,0.7,0.3);
             TimerTask Pt1 = new TimerTask(){
@@ -592,36 +550,4 @@ public class Katuage extends JavaPlugin implements Listener {
             };
             timer.schedule(del,6000);
         }
-    public void MoneyItemProcessing(Player p,Entity i,Location l){
-        p.getWorld().playSound(l, Sound.ITEM_ARMOR_EQUIP_CHAIN, 100, 1);
-        Item ic = (Item) i;
-        ic.setCustomName(null);
-        ic.setCustomName("KatuagePlugin"+p.getName());
-        i.getLocation().getWorld().spawnParticle(Particle.VILLAGER_HAPPY,i.getLocation(),8,0.3,0.7,0.3);
-        TimerTask Pt1 = new TimerTask(){
-            public void run(){
-                i.getLocation().getWorld().spawnParticle(Particle.VILLAGER_HAPPY,i.getLocation(),8,0.3,0.7,0.3);
-            }
-        };
-        timer.schedule(Pt1,1000);
-        TimerTask Pt2 = new TimerTask(){
-            public void run(){
-                i.getLocation().getWorld().spawnParticle(Particle.VILLAGER_HAPPY,i.getLocation(),8,0.3,0.7,0.3);
-            }
-        };
-        timer.schedule(Pt2,2000);
-        TimerTask Pt3 = new TimerTask(){
-            public void run(){
-                i.getLocation().getWorld().spawnParticle(Particle.VILLAGER_HAPPY,i.getLocation(),8,0.3,0.7,0.3);
-            }
-        };
-        timer.schedule(Pt3,3000);
-        TimerTask del = new TimerTask(){
-            public void run(){
-                ic.setCustomName(null);
-            }
-        };
-        timer.schedule(del,6000);
-    }
-
 }
