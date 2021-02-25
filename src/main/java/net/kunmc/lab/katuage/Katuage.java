@@ -344,7 +344,7 @@ public class Katuage extends JavaPlugin implements Listener {
         reloadConfig();
         int numP = rand.nextInt(100);//アイテムドロップの確立
         FileConfiguration config = getConfig();
-        if (Visibilty(p, e) == true&&e.isSneaking()&&config.getBoolean("PluginOnOff") == true) {
+        if (Visibilty(p, e) == true&&(e.isSneaking())&&config.getBoolean("PluginOnOff") == true) {
             if (config.getBoolean("DamageDropOnOff") == true && ItemCheck(p) == true) {
                 int numI = rand.nextInt(40);//インベントリアイテムの番号指定
                 int numA = Integer.parseInt(config.getString("DamageDropProbability"));
@@ -378,9 +378,7 @@ public class Katuage extends JavaPlugin implements Listener {
 
     //マネークラフト連携確認
     @EventHandler
-    public void onMove(PlayerMoveEvent event){
-        MoneyCheck();
-    }
+    public void onMove(PlayerMoveEvent event){ MoneyCheck();}
     @EventHandler
     public void onJoin(PlayerJoinEvent event){
         MoneyCheck();
@@ -504,17 +502,27 @@ public class Katuage extends JavaPlugin implements Listener {
         if(r1+70>360){
             r1min = r1+70-360;
             r1max = r1-70;
+            if(r1min>=r2||r1max<=r2){
+                return true;
+            }else{
+                return false;
+            }
         }else if(r1-70<0){
             r1min = r1 + 70;
             r1max = 360 +(r1-70);
+            if(r1min>=r2||r1max<=r2){
+                return true;
+            }else{
+                return false;
+            }
         }else{
             r1min = r1-70;
             r1max = r1+70;
-        }
-        if(r1min<=r2&&r1max>=r2){
-            return true;
-        }else{
-            return false;
+            if(r1min<=r2&&r1max>=r2){
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 
