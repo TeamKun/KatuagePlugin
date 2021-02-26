@@ -1,9 +1,11 @@
-name: RuleBookPlugin
-main: net.kunmc.lab.rulebookplugin.RuleBookPlugin
+name: Katuage
+version: 3.7
+main: net.kunmc.lab.katuage.Katuage
 api-version: 1.15
-version: 2.0
+authors: [ yanaaaaa ]
+softdepend: [ MoneyCraft,Vault ]
 commands:
-  rulebook:
-    description: 'GitHubを見てね!'
-    usage: 'GitHubを見てね!'
+  katuage:
+    description: Notionもしくは GitHubを見てね。
+    usage: Notionもしくは GitHubを見てね。
     default: true
